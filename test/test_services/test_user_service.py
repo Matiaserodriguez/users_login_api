@@ -36,3 +36,20 @@ class TestUserService(unittest.TestCase):
         self.assertEqual('pass', answer[1].password)
         self.assertEqual('01-03-1987', answer[1].birth)
         self.assertEqual('python', answer[1].programming_languaje.name)
+
+    def test_query_first_user_returns_its_values(self):
+        user1 = user.insert("Pizza", "pass", "07/09/2008", 'javascript')
+        answer = user.obtain_one(user1.id)
+
+        self.assertEqual('Pizza', answer.name)
+        self.assertEqual('pass', answer.password)
+        self.assertEqual('07/09/2008', answer.birth)
+        self.assertEqual('javascript', answer.programming_languaje.name)
+
+    def test_update_users_name_returns_new_name(self):
+        user1 = user.insert("Pizza", "pass", "07/09/2008", 'javascript')
+        answer = user.update(user1.id, name='Pablo', password='Jumanji', programming_languaje='python')
+
+        self.assertEqual('Pablo', answer.name)
+        self.assertEqual('Jumanji', answer.password)
+        self.assertEqual('python', answer.programming_languaje.name)
