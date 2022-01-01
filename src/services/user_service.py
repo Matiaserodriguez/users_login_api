@@ -34,4 +34,10 @@ class UserService(ConnectionService):
 
         return user_to_update
 
+    @commit_after
+    def delete_one(self, _id):
+        user_to_delete = self.obtain_one(_id)
+        self._session.delete(user_to_delete)
+
+
 user = UserService()
