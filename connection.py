@@ -19,4 +19,4 @@ class Connection:
     def __del__(self):
         self.__session.close()
         
-connection = Connection("postgresql://qmnqluroxinfta:2025938ff1f39fef4a03ef2cecd8016001905cb9f84c3772fec4e4b22487ae4f@ec2-52-70-205-234.compute-1.amazonaws.com:5432/dfmjq7ss6pvs8r")
+connection = Connection(os.environ['DATABASE_ENV'])
