@@ -8,12 +8,14 @@ from src.services.user_service import user
 class TestUserService(unittest.TestCase):
 
    def tearDown(self):
-      connection.session.query(UserModel).delete()   
+      connection.session.query(UserModel).delete() 
+      connection.session.commit()
 
    def test_insert_user_returns_user_created(self):
-      answer = user.insert("Queso", "password", "07/09/2008")
+      answer = user.insert("Pasta", "password", "07/09/2008", 'python')
 
-      self.assertEqual("Queso", answer.name)
+      self.assertEqual("Pasta", answer.name)
       self.assertEqual("password", answer.password)
       self.assertEqual("07/09/2008", answer.birth)
+      self.assertEqual("python", answer.programming_languaje.name)
       self.assertIsInstance(answer.id, int)

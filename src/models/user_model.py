@@ -1,8 +1,12 @@
+import enum
 from sqlalchemy import Column, Integer, String, Enum
 
 from . import Base
-from src.services.tables_service import CreatesTable
 
+class ProgrammingLanguajes(enum.Enum):
+    python = 1
+    javascript = 2
+    php = 3
 
 class UserModel(Base):
     __tablename__ = "users"
@@ -10,7 +14,4 @@ class UserModel(Base):
     name = Column(String(100), nullable = False, unique=True)
     password = Column(String(255), nullable=False)
     birth = Column(String(100), nullable=False)
-    # programming_languajes = Column(Enum('python', 'JS', 'php', name="programming_languajes"), nullable=True)
-    
-
-user_table = CreatesTable(UserModel)
+    programming_languaje = Column(Enum(ProgrammingLanguajes), nullable=True)

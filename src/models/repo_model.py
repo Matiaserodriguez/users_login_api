@@ -5,7 +5,6 @@ from sqlalchemy.sql.sqltypes import DateTime
 from . import Base
 
 from sqlalchemy import Column, Integer, String, Enum, Date
-from src.services.tables_service import CreatesTable
 
 
 class RepoModel(Base):
@@ -15,5 +14,3 @@ class RepoModel(Base):
     languaje = Column(Enum(name="kinds_of_languajes"), nullable=False)
     creation_date = Column(DateTime(), default=date, nullable=False)
     description = Column(String)
-
-repo_table = CreatesTable(RepoModel)
