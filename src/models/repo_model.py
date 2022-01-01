@@ -5,7 +5,7 @@ from sqlalchemy.sql.sqltypes import DateTime
 from . import Base
 
 from sqlalchemy import Column, Integer, String, Enum, Date
-from tables import CreatesTable
+from src.services.tables_service import CreatesTable
 
 
 class RepoModel(Base):

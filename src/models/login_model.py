@@ -3,7 +3,7 @@ from sqlalchemy import Column, Enum, String, DateTime, Integer
 
 from . import Base
 
-from tables import CreatesTable
+from src.services.tables_service import CreatesTable
 
 
 class LoginModel(Base):
