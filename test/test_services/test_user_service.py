@@ -48,10 +48,8 @@ class TestUserService(unittest.TestCase):
 
     def test_update_users_name_pass_and_languaje_returns_updated_values(self):
         user1 = user.insert("Pizza", "pass", "07/09/2008", 'javascript')
-        answer = user.update(user1.id, name='Pablo', password='Jumanji', programming_languaje='python')
+        answer = user.update(user1.id, programming_languaje='python')
 
-        self.assertEqual('Pablo', answer.name)
-        self.assertEqual('Jumanji', answer.password)
         self.assertEqual('python', answer.programming_languaje.name)
 
     def test_delete_one_user_returns_none_as_answer(self):
@@ -61,3 +59,4 @@ class TestUserService(unittest.TestCase):
         answer = user.obtain_one(user1.id)
 
         self.assertEqual(None, answer)
+        

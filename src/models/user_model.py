@@ -3,10 +3,15 @@ from sqlalchemy import Column, Integer, String, Enum
 
 from . import Base
 
+
 class ProgrammingLanguajes(enum.Enum):
     python = 1
     javascript = 2
     php = 3
+    c = 4
+    sql = 5
+    swift = 6
+    ruby = 7
 
 class UserModel(Base):
     __tablename__ = "users"
