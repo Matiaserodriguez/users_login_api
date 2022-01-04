@@ -22,25 +22,12 @@ class UserService(ConnectionService):
 
     @commit_after
     def update(self, _id, **kwargs):
-
         user_to_update = self.obtain_one(_id)
-        
+
         for key, value in kwargs.items():
-            if key == 'name':
-                user_to_update.name = value
-            elif key == 'password':
-                user_to_update.password = value
-            elif key == 'birth':
-                user_to_update.birth = value
-            elif key == 'programming_languaje':
-                for i in list(ProgrammingLanguajes):
-                    if value.lower() in str(i):
-                        user_to_update.programming_languaje = value.lower()
-                        return user_to_update
+            setattr(user_to_update, key, value)
 
-                user_to_update.programming_languaje = None
-
-            return user_to_update
+        return user_to_update
 
     @commit_after
     def delete_one(self, _id):
