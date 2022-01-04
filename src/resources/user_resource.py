@@ -35,18 +35,11 @@ class UsersResource(Resource):
 
     @api.marshal_with(user_model, code=200)
     def put(self):
-
+        
         value = list(api.payload.keys())[1:][0]
-        if value == 'name':
-            answer = user.update(api.payload['id'], name=api.payload[value])
-        elif value == 'birth':
-            answer = user.update(api.payload['id'], birth=api.payload[value])
-        elif value == 'password':
-            answer = user.update(api.payload['id'], password=api.payload[value])
-        elif value == 'programming_languaje':
-            if value == None:
-                return {400: 'Not recognized or bad programming languaje'}, 400
-            answer = user.update(api.payload['id'], programming_languaje=api.payload[value])
+        kw = {value: api.payload[value]}
+        
+        answer = user.update(api.payload['id'], **kw)
 
         return answer, 200
 

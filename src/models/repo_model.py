@@ -11,6 +11,6 @@ class RepoModel(Base):
     __tablename__ = 'repositories'
     id = Column(Integer, primary_key=True)
     project_name = Column(String(255), nullable=False)
-    languaje = Column(Enum(ProgrammingLanguajes), nullable=True)
+    languaje = Column(Enum(ProgrammingLanguajes), nullable=False)
     creation_date = Column(DateTime(), default=date.today(), nullable=False)
     description = Column(String)
