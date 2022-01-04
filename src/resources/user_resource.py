@@ -1,7 +1,9 @@
+from os import access
 from flask_restx import Resource, fields
+from flask_jwt_extended import create_access_token
 
 from src.models.user_model import ProgrammingLanguajes
-from ..services import user
+from ..services import user, login_serv
 from src import api
 
 
@@ -46,3 +48,15 @@ class UsersResource(Resource):
     def delete(self):
         user.delete_one(api.payload['id'])
         return "", 204
+
+class UserLoginResource(Resource):
+    def post(self):
+
+        if user.login(api.payload['name'], api.payload['password']):
+            access_token = create_access_token(identity=api.payload['name'])
+            login_serv.insert('login', api.payload['name'])
+            return {'token': access_token}, 201
+
+        else:
+            return {'msg': 'Username and/or password is incorrect'}, 401
+            

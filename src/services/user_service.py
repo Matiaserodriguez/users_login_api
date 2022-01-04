@@ -1,5 +1,5 @@
-from sqlalchemy.exc import IntegrityError
-from src.models.user_model import ProgrammingLanguajes, UserModel
+from sqlalchemy.sql.elements import and_
+from src.models.user_model import UserModel
 from .connect_service import ConnectionService
 from .commit_after_service import commit_after
 from connection import connection
@@ -34,5 +34,13 @@ class UserService(ConnectionService):
         user_to_delete = self.obtain_one(_id)
         self._session.delete(user_to_delete)
 
+    def login(self, name, password):
+
+        user = self._session.query(UserModel).filter(and_(UserModel.name == name, UserModel.password == password)).first()
+
+        if user == None:
+            return False
+        
+        return user
 
 user = UserService()

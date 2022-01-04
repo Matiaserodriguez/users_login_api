@@ -3,13 +3,14 @@ from src.models.user_model import UserModel
 from src.models.repo_model import RepoModel
 from src.models.login_model import LoginModel
 from src.resources.repo_resource import RepoResource
-from src.resources.user_resource import UsersResource
+from src.resources.user_resource import UserLoginResource, UsersResource
 from src.services.tables_service import CreatesTable
 from src.services.user_service import user
 
 
 api.add_resource(UsersResource, '/users', endpoint='users_ep')
 api.add_resource(RepoResource, '/repos', endpoint='repos_ep')
+api.add_resource(UserLoginResource, '/users/login', endpoint='login_ep')
 
 
 user_table = CreatesTable(UserModel)
