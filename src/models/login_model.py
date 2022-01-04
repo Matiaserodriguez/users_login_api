@@ -8,5 +8,5 @@ class LoginModel(Base):
     __tablename__ = 'login_report'
     id = Column(Integer, primary_key=True)
     date_time = Column(DateTime(), default=datetime.now())
-    type_of = Column(Enum('login', 'logoff', name='type_login'), nullable=False)
+    type_of = Column(Enum('login', 'logout', name='type_login'), nullable=False)
     user_id = Column(String(255), nullable=False)
