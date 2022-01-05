@@ -1,2 +1,2 @@
 from .repo_resource import RepoResource
-from .user_resource import UsersResource
+from .user_resource import UsersResource, UserLoginResource
