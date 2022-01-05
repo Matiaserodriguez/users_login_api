@@ -9,6 +9,6 @@ api = Api(app, version='1.0', title='Users Login API', description='API for logg
 
 app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET_KEY']
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 3600
-app.config['ERROR_INCLUDE_MESSAGE'] = False
+# app.config['ERROR_INCLUDE_MESSAGE'] = False
 
 jwt = JWTManager(app)
