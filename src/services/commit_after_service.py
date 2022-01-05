@@ -10,7 +10,7 @@ def commit_after(data_function):
             connection.session.commit()
         except IntegrityError:
             connection.session.rollback()
-            raise IntegrityError
+            raise IntegrityError('Entity not allowed for this request')
         else:
             return new_object
     return wrapper

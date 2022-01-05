@@ -4,6 +4,7 @@ from .config import user, password, host, database
 
 path_database = f'postgresql://{user}:{password}@{host}:5432/{database}'
 os.environ['DATABASE_ENV'] = path_database
+os.environ['JWT_SECRET_KEY'] = "clave secreta"
 if os.path.exists(path_database):
     os.remove(path_database)
 

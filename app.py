@@ -21,7 +21,6 @@ login_table.create_table()
 repo_table.create_table()
 user_table.create_table()
 
-# user.insert("Jaimito", "password", "07/09/2008")
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
