@@ -25,16 +25,18 @@ class RepoResource(Resource):
     @api.marshal_with(repo_model, code=201)
     @jwt_required()
     def post(self):
-        for lenguaje in list(ProgrammingLanguajes):
-            if api.payload['languaje'].lower() == str(lenguaje.name):
-                try:
-                    answer = repo.insert(api.payload['project_name'], api.payload['languaje'].lower(), api.payload['description'])
-                    return answer, 201
-                except:
-                    answer2 = repo.insert(api.payload['project_name'], api.payload['languaje'].lower())
-                    return answer2, 201
-            
-        return {400: 'Bad Request'}, 400
+        try:
+            for lenguaje in list(ProgrammingLanguajes):
+                if api.payload['languaje'].lower() == str(lenguaje.name):
+                    try:
+                        answer = repo.insert(api.payload['project_name'], api.payload['languaje'].lower(), api.payload['description'])
+                        return answer, 201
+                    except KeyError:
+                        answer2 = repo.insert(api.payload['project_name'], api.payload['languaje'].lower())
+                        return answer2, 201
+
+        except KeyError:
+            return {400: 'Bad Request'}, 400
         
         
 

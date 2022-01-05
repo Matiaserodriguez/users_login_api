@@ -36,15 +36,17 @@ class UsersResource(Resource):
 
     @api.marshal_with(user_model, code=201)
     def post(self):
-        for lenguaje in list(ProgrammingLanguajes):
-            if api.payload['programming_languaje'].lower() in str(lenguaje):
-                answer = user.insert(api.payload['name'], api.payload['password'], api.payload['birth'], api.payload['programming_languaje'].lower())
-                login_serv.insert('sign-up', api.payload['name'])
-                return answer, 201
-        
-        answer = user.insert(api.payload['name'], api.payload['password'], api.payload['birth'])
-        login_serv.insert('sign-up', api.payload['name'])
-        return answer, 201
+        try:
+            for lenguaje in list(ProgrammingLanguajes):
+                if api.payload['programming_languaje'].lower() in str(lenguaje):
+                    answer = user.insert(api.payload['name'], api.payload['password'], api.payload['birth'], api.payload['programming_languaje'].lower())
+                    login_serv.insert('sign-up', api.payload['name'])
+                    return answer, 201
+
+        except KeyError:
+            answer = user.insert(api.payload['name'], api.payload['password'], api.payload['birth'])
+            login_serv.insert('sign-up', api.payload['name'])
+            return answer, 201
 
     @api.marshal_with(user_model, code=200)
     @jwt_required()
