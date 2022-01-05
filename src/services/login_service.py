@@ -12,8 +12,9 @@ class LoginService(ConnectionService):
         user = self._session.query(UserModel).filter(UserModel.name == name).first()
 
         if user == None:
+            connection.session.rollback()
             return False
-            
+
         new_login = LoginModel(type_of=type_of, user_id=user.id)
 
         self._session.add(new_login)

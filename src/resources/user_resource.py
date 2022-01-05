@@ -13,7 +13,7 @@ user_model = api.model('Users', {
     'programming_languaje': fields.String(
         attribute='programming_languaje.name', 
         default=None, 
-        description='Programming Languajes only accepts python, javascript, php'
+        description='Programming Languajes only accepts python, javascript, php, c, sql, swift, ruby'
     )
 })
 
