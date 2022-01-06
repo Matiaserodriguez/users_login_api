@@ -6,11 +6,11 @@ from ..services import repo
 from src import api
 
 repo_model = api.model('Repositories', {
-    'id': fields.Integer,
+    'id': fields.Integer(readonly=True, description='Repo ID, not necessary for HTTP requests'),
     'project_name': fields.String(attribute='project_name'),
-    'languaje': fields.String(attribute='languaje.name'),
+    'languaje': fields.String(attribute='languaje.name', description='"languaje" only accepts python, javascript, php, c, sql, swift, ruby'),
     'creation_date': fields.Date(attribute='creation_date'),
-    'description': fields.String(attribute='description', default=None)
+    'description': fields.String(attribute='description', default=None, description='[optional]')
 })
 
 
@@ -38,7 +38,6 @@ class RepoResource(Resource):
         except KeyError:
             return {400: 'Bad Request'}, 400
         
-        
 
     @api.marshal_with(repo_model, code=200)
     @jwt_required()
@@ -50,6 +49,7 @@ class RepoResource(Resource):
 
         return answer, 200
 
+    @api.doc(params={'id': 'Integer ID'})
     @jwt_required()
     def delete(self):
         repo.delete_one(api.payload['id'])

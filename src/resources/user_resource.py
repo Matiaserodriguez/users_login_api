@@ -7,13 +7,13 @@ from src import api
 
 
 user_model = api.model('Users', {
-    'id': fields.Integer,
+    'id': fields.Integer(readonly=True, description='User ID, not necessary for HTTP requests'),
     'name': fields.String(attribute='name'),
     'birth': fields.String(attribute='birth'),
     'programming_languaje': fields.String(
         attribute='programming_languaje.name', 
         default=None, 
-        description='Programming Languajes only accepts python, javascript, php, c, sql, swift, ruby'
+        description='[optional]"programming_languaje" only accepts python, javascript, php, c, sql, swift, ruby'
     )
 })
 
@@ -59,6 +59,7 @@ class UsersResource(Resource):
 
         return answer, 200
 
+    @api.doc(params={'id': 'Integer ID'})
     @jwt_required()
     def delete(self):
         user.delete_one(api.payload['id'])
